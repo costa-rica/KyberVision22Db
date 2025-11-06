@@ -1,6 +1,6 @@
 # Database Schema Overview
 
-This document provides a comprehensive overview of the KyberVision20Db database schema. All tables use SQLite as the underlying database engine and are managed through Sequelize ORM.
+This document provides a comprehensive overview of the KyberVision22Db database schema. All tables use SQLite as the underlying database engine and are managed through Sequelize ORM.
 
 ## Core Entity Tables
 

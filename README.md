@@ -1,15 +1,14 @@
 ![Logo](./docs/images/kyberVisionLogo01.png)
 
-A Sequelize SQLite module for the KyberVision20API and microservices suite of applications.
+A Sequelize SQLite module for the KyberVision22API and microservices suite of applications.
 
-## v20 TypeScript Migration (DB Models)
+- v22 (lifted from KyberVision20Db)
 
-We are migrating the Sequelize models from **KyberVision18Db** (JavaScript) to **KyberVision20Db** (TypeScript).  
+## Overview
+
 The canonical examples are `User.ts` and `ContractUserAction.ts`. All remaining models should follow the same pattern.
 
-- Implementation guide: see **docs/MODELING_GUIDE.md**
-- Legacy references (v18 JS): **docs/KyberVision18DbReference/**
-- Package usage: `npm i file:../KyberVision20Db` then `import { initModels } from "kybervision20db";`
+- Package usage: `npm i file:../KyberVision22Db` then `import { initModels } from "kybervision22db";`
 - Build before commit: `npm run build` (we commit `dist/`)
 
 If adding a new model, ensure:
@@ -18,8 +17,6 @@ If adding a new model, ensure:
 2. Foreign keys use `snake_case` columns; model names are `PascalCase`.
 3. Add the model to `src/models/_index.ts` and wire associations in `_associations.ts`.
 4. Run `npm run build`, and verify types are emitted (`dist/index.d.ts`).
-
-### v20.0.0
 
 ## installation
 
@@ -32,7 +29,7 @@ If adding a new model, ensure:
 
 ## import to other apps
 
-`npm i file:../KyberVision20Db`
+`npm i file:../KyberVision22Db`
 
 ## Environmental Variables
 
