@@ -2,6 +2,116 @@
 
 This document provides a comprehensive overview of the KyberVision22Db database schema. All tables use SQLite as the underlying database engine and are managed through Sequelize ORM.
 
+- One class per table (`src/models/<Name>.ts`) with strong typings.
+- Centralized initialization and associations.
+- Emit `.d.ts` so downstream apps (API, mobile) get type-safe imports.
+- dist/ is the output directory for compiled JavaScript files.
+- src/ is the source directory for TypeScript files.
+- All tables have an updatedAt and createdAt field.
+
+## Database / Project Architecture
+
+### Project Structure
+
+```
+NewsNexusDb09/
+├── src/                          # TypeScript source files
+│   ├── index.ts                  # Main entry point
+│   └── models/                   # Sequelize model definitions
+│       ├── _connection.ts        # Database connection setup
+│       ├── _index.ts            # Model registry and exports
+│       ├── _associations.ts     # All model relationships
+│       ├── Action.ts            # Action model
+│       ├── User.ts              # User management
+│       └── [ other models...] # Complete model suite
+├── dist/                        # Compiled JavaScript output
+│   ├── index.js                 # Compiled entry point
+│   ├── index.d.ts               # TypeScript declarations
+│   └── models/                  # Compiled models with .d.ts files
+├── docs/                        # Documentation
+└── package.json                 # Project configuration
+```
+
+## Template (copy for each new model)
+
+```ts
+// src/models/Example.ts
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+  ForeignKey,
+  NonAttribute,
+} from "sequelize";
+import { sequelize } from "./_connection";
+
+export class Example extends Model<
+  InferAttributes<Example>,
+  InferCreationAttributes<Example>
+> {
+  declare id: CreationOptional<number>;
+  declare name: string;
+
+  // FK example:
+  // declare userId: ForeignKey<User["id"]>;
+  // declare user?: NonAttribute<User>;
+}
+
+export function initExample() {
+  Example.init(
+    {
+      id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+      name: { type: DataTypes.STRING, allowNull: false },
+      // userId: { type: DataTypes.INTEGER, allowNull: false }
+    },
+    {
+      sequelize,
+      tableName: "examples",
+      timestamps: true,
+    }
+  );
+  return Example;
+}
+```
+
+## Example src/models/\_index.ts
+
+```ts
+// SAMPLE of different proejctsrc/models/_index.ts
+import { sequelize } from "./_connection";
+
+import { initExample, Example } from "./Example";
+
+import { applyAssociations } from "./_associations";
+
+/** Initialize all models and associations once per process. */
+export function initModels() {
+  initExample();
+  applyAssociations();
+
+  return {
+    sequelize,
+    Example,
+  };
+}
+
+// 👇 Export named items for consumers
+export { sequelize, Example };
+
+// 👇 Export named items for consumers
+export { sequelize, Example };
+```
+
+### Database Configuration
+
+- **Database Type**: SQLite (via Sequelize ORM)
+- **Environment Variables**:
+  - `PATH_DATABASE`: Directory path for database file
+  - `NAME_DB`: Database filename
+- **No .env file required**: Inherits environment from importing application
+
 ## Core Entity Tables
 
 ### users
