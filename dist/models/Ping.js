@@ -31,11 +31,39 @@ function initPing() {
         userDeviceTimestamp: {
             // ts-expect-error: precision is ignored on some dialects (e.g., sqlite) but safe to specify.
             type: sequelize_1.DataTypes.DATE(6),
-            allowNull: false,
+            allowNull: true,
         },
         endpointName: {
             type: sequelize_1.DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
+        },
+        deviceName: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
+        deviceType: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
+        isTablet: {
+            type: sequelize_1.DataTypes.BOOLEAN,
+            allowNull: true,
+        },
+        manufacturer: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
+        modelName: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
+        osName: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
+        },
+        osVersion: {
+            type: sequelize_1.DataTypes.STRING,
+            allowNull: true,
         },
     }, {
         sequelize: _connection_1.sequelize,

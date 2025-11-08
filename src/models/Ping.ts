@@ -24,19 +24,19 @@ export class Ping extends Model<
 	declare serverTimestamp: CreationOptional<Date>;
 
 	// Client-provided UTC timestamp from the device, ideally an ISO string parsed to Date.
-	declare userDeviceTimestamp: Date;
+	declare userDeviceTimestamp: Date | null;
 
 	// Endpoint name invoked when this ping was recorded.
-	declare endpointName: string;
+	declare endpointName: string | null;
 
 	// Device information fields
-	declare deviceName: string;
-	declare deviceType: string;
-	declare isTablet: boolean;
-	declare manufacturer: string;
-	declare modelName: string;
-	declare osName: string;
-	declare osVersion: string;
+	declare deviceName: string | null;
+	declare deviceType: string | null;
+	declare isTablet: boolean | null;
+	declare manufacturer: string | null;
+	declare modelName: string | null;
+	declare osName: string | null;
+	declare osVersion: string | null;
 }
 
 export function initPing() {
@@ -65,47 +65,47 @@ export function initPing() {
 			userDeviceTimestamp: {
 				// ts-expect-error: precision is ignored on some dialects (e.g., sqlite) but safe to specify.
 				type: (DataTypes.DATE as unknown as (precision?: number) => any)(6),
-				allowNull: false,
+				allowNull: true,
 			},
 
 			endpointName: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			deviceName: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			deviceType: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			isTablet: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			manufacturer: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			modelName: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			osName: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 
 			osVersion: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 		},
 		{
