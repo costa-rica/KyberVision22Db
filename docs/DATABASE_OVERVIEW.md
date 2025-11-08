@@ -333,6 +333,27 @@ export { sequelize, Example };
 | email  | STRING  | NOT NULL           | Invitee email address |
 | teamId | INTEGER | NOT NULL           | Reference to team     |
 
+### pings
+
+**Purpose**: Tracks user activity pings with device information
+
+| Column               | Type    | Constraints         | Description                               |
+| -------------------- | ------- | ------------------- | ----------------------------------------- |
+| id                   | INTEGER | PK, Auto Increment  | Primary key                               |
+| userId               | INTEGER | NOT NULL            | Reference to user                         |
+| serverTimestamp      | DATE(6) | NOT NULL, DEFAULT NOW | Server-side UTC timestamp (microseconds) |
+| userDeviceTimestamp  | DATE(6) | NOT NULL            | Client-provided UTC timestamp             |
+| endpointName         | STRING  | NOT NULL            | Endpoint name invoked for this ping       |
+| deviceName           | STRING  | NOT NULL            | Device name (e.g., "iPhone 15 Pro")       |
+| deviceType           | STRING  | NOT NULL            | Device type (e.g., "Handset")             |
+| isTablet             | BOOLEAN | NOT NULL            | Whether device is a tablet                |
+| manufacturer         | STRING  | NOT NULL            | Device manufacturer (e.g., "Apple")       |
+| modelName            | STRING  | NOT NULL            | Device model name                         |
+| osName               | STRING  | NOT NULL            | Operating system name (e.g., "iOS")       |
+| osVersion            | STRING  | NOT NULL            | Operating system version                  |
+
+**Indexes**: Index on userId, index on serverTimestamp
+
 ## Key Relationships
 
 ### Core Entity Relationships

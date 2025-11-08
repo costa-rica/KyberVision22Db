@@ -28,6 +28,15 @@ export class Ping extends Model<
 
 	// Endpoint name invoked when this ping was recorded.
 	declare endpointName: string;
+
+	// Device information fields
+	declare deviceName: string;
+	declare deviceType: string;
+	declare isTablet: boolean;
+	declare manufacturer: string;
+	declare modelName: string;
+	declare osName: string;
+	declare osVersion: string;
 }
 
 export function initPing() {
@@ -60,6 +69,41 @@ export function initPing() {
 			},
 
 			endpointName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+
+			deviceName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+
+			deviceType: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+
+			isTablet: {
+				type: DataTypes.BOOLEAN,
+				allowNull: false,
+			},
+
+			manufacturer: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+
+			modelName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+
+			osName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+
+			osVersion: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
